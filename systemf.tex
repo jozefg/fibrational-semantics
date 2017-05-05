@@ -15,7 +15,7 @@ The first two judgments are defined by mutual induction
   }{\ctxJ{\Gamma, x : \tau}}\and
   \inferrule{
     \typeJ{\Gamma, \alpha}{\tau}
-  }{\typeJ{\Gamma}{\forall \alpha. \tau}}\and
+  }{\typeJ{\Gamma}{\all{\alpha}{\tau}}}\and
   \inferrule{
     \typeJ{\Gamma}{\tau_1}\\
     \typeJ{\Gamma}{\tau_2}
@@ -24,3 +24,36 @@ The first two judgments are defined by mutual induction
     \alpha \in \Gamma
   }{\typeJ{\Gamma}{\alpha}}\and
 \end{mathpar}
+
+Next we have the usual typing rules for terms. One will observe that I
+deviate from some presentations of System F by using only one context
+to represent types \emph{and} terms rather than two distinct
+contexts. This is a nod towards the semantics where such things will
+be fundamentally mixed together anyways.
+
+\begin{mathpar}
+  \inferrule{
+    x : \tau \in \Gamma
+  }{\hastypeJ{\Gamma}{x}{\tau}}\and
+  \inferrule{
+    \hastypeJ{\Gamma, x : \tau_1}{e}{\tau_2}
+  }{\hastypeJ{\Gamma}{\lam{x}{\tau}{e}}{\tau_1 \to \tau_2}}\and
+  \inferrule{
+    \hastypeJ{\Gamma}{e_1}{\tau_1 \to \tau_2}\\
+    \hastypeJ{\Gamma}{e_2}{\tau_1}
+  }{\hastypeJ{\Gamma}{\ap{e_1}{e_2}}{\tau_2}}\and
+  \inferrule{
+    \hastypeJ{\Gamma, \alpha}{e}{\tau}
+  }{\hastypeJ{\Gamma}{\Lam{x}{e}}{\all{\alpha}{\tau}}}\and
+  \inferrule{
+    \hastypeJ{\Gamma}{e}{\all{\alpha}{\tau_1}}\\
+    \typeJ{\Gamma}{\tau_2}
+  }{\hastypeJ{\Gamma}{\Ap{e}{\tau_2}}{[\tau_2/\alpha]\tau_1}}\and
+\end{mathpar}
+
+Having fleshed out the objects of our language we now turn to the
+semantics of our language. They will proceed in three parts. First we
+isolate the specific variety of fibration that we will be
+studying. Second we will denote the terms and contexts into objects in
+base category. Finally, we will denote terms into the fibers above
+contexts.

@@ -191,3 +191,59 @@ using cartesian maps.
 \begin{proof}
   todo
 \end{proof}
+
+In order to see that this characterization is even equivalent to this
+sort of indexing structure, we will next investigate the so called
+\emph{Grothendieck construction}. This allows us to turn a
+pseudofunctor $\Bcat \to \cat{Cat}$ into a particular fibration. This
+lets us know that we haven't lost or gained anything essential by
+switching to the fibrational presentation of indexing.
+
+\begin{thm}\label{thm:fibrations:grothendieckconstruction}
+  Every pseudofunctor $\Bcat \to \cat{Cat}$ corresponds to a fibration
+  over $\Bcat$.
+\end{thm}
+\begin{proof}
+  todo
+\end{proof}
+
+Having set out this very abstract definition, I will now relate it to
+what we were previously studying: indexed families of sets. In
+particular, let us look at the so called \emph{codomain fibration}:
+$\cod$. In order to do this, let us start with a few preliminary
+definitions.
+
+\begin{defn}\label{defn:fibrations:arrowcat}
+  The arrow category over a category, $\Ccat$, is written
+  $\Ccat^{\to}$ and is defined with
+  \begin{description}
+  \item[Objects] For objects arrows $f : A \to B$
+  \item[Morphisms] A morphism between $f : A \to B$ and $g : C \to D$
+    is a pair of morphisms $(h, h')$ so that $h : A \to C$ and $h' : B
+    \to D$ and the following commutes
+    \[
+      \begin{tikzcd}
+        A \ar[d, "f", swap] \ar[r, "h"] & B \ar[d, "g"]\\
+        C \ar[r, "h'", swap] & D
+      \end{tikzcd}
+    \]
+  \end{description}
+\end{defn}
+
+The reader is referred to~\citet{MacLane:98} for a more detailed
+investigation of the arrow category. For our purposes we are largely
+interested in the codomain functor $\cod : \Ccat^{\to} \to
+\Ccat$. It is defined
+\begin{align*}
+  \cod(f : A \to B) &= B\\
+  \cod(h, h') &= h'
+\end{align*}
+it is trivial to check this indeed defines a functor. More than this
+though, in a category with pullbacks this functor is in fact a
+fibration.
+\begin{example}\label{example:fibrations:cod}
+  The $\cod$ functor defines a fibration.
+\end{example}
+\begin{proof}
+  todo
+\end{proof}

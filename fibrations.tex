@@ -271,3 +271,35 @@ theory of fibrations abstractly. The reader is referred to
 \citet{Jacobs:01} for a more in-depth coverage of fibered category
 theory. For our purposes, I only want to flesh out enough theory to
 explain the semantics of System F in the next section.
+
+The reindexing functors are our first object of consideration. In
+particular, it is worth mentioning a few details that I would like to
+promptly handwave away. Firstly, the definition of a fibration
+stipulates the existence of liftings but does not include the data of
+which particular liftings we chose. If one wants to model this set
+theoretically, one needs to demand the axiom of choice or select a
+particular collection of liftings. The alternative is to not use a
+broken notion of existential quantification but that seems less likely
+to see widespread adoption. In any case, a fibration is said to be
+\emph{cloven} if it comes equipped with a choice of liftings. Next the
+liftings themselves give rise to reindexing functors as we have
+seen. However, there is a question as to the coherence of these
+functors. For instance, we have seen that
+$u^* \circ v^* \cong (v \circ u)^*$ and $1 \cong 1^*$. In a fibration
+if our choice of liftings makes these equivalences simply identities,
+we shall call the fibration \emph{split}. Now it is the case that
+every cloven fibration is equivalent to a split one so I shall for the
+rest of this paper assume that we are working with split cloven
+fibrations unless stated otherwise.
+
+The next area to explore is the structure that may be found in each
+fiber. In particular, we might want to demand the usual categorical
+constructs: limits, colimits, exponentials, etc. It turns out to be
+straightforward to add these to our model.
+
+\begin{defn}\label{defn:fibrations:fiberwiseX}
+  A fibration $p : \Ecat \to \Bcat$ is said to posses \emph{fiberwise
+    X} if each fiber $\Ecat_I$ possesses Xs and Xs are preserved by
+  reindexing. We will say that this structure is \emph{split} if it is
+  preserved on the nose by reindexing.
+\end{defn}

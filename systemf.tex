@@ -1,1 +1,26 @@
 \section{Semantics for System F}
+
+Let us start with a simple definition of System F. To be more explicit
+than usual, let us start by noting the three core judgments of the
+system.
+\[
+  \ctxJ{\Gamma} \qquad \typeJ{\Gamma}{\tau} \qquad \hastypeJ{\Gamma}{e}{\tau}
+\]
+The first two judgments are defined by mutual induction
+\begin{mathpar}
+  \inferrule{ }{\ctxJ{\cdot}} \and
+  \inferrule{
+    \ctxJ{\Gamma}\\
+    \typeJ{\Gamma}{\tau}
+  }{\ctxJ{\Gamma, x : \tau}}\and
+  \inferrule{
+    \typeJ{\Gamma, \alpha}{\tau}
+  }{\typeJ{\Gamma}{\forall \alpha. \tau}}\and
+  \inferrule{
+    \typeJ{\Gamma}{\tau_1}\\
+    \typeJ{\Gamma}{\tau_2}
+  }{\typeJ{\Gamma}{\tau_1 \to \tau_2}}\and
+  \inferrule{
+    \alpha \in \Gamma
+  }{\typeJ{\Gamma}{\alpha}}\and
+\end{mathpar}

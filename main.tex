@@ -1,0 +1,78 @@
+\documentclass[12pt]{amsart}
+\usepackage{amsmath, amssymb, amsopn, stmaryrd, amsthm}
+\usepackage{microtype, fullpage}
+\usepackage{tikz-cd}
+\usepackage[numbers]{natbib}
+\usepackage[hyperfootnotes=false]{hyperref}
+\usepackage{parskip}
+
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\pto}[1]{\rightharpoonup}
+\newcommand{\den}[1]{\llbracket #1 \rrbracket}
+\newcommand{\cat}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\sheaves}[2][]{\ensuremath{\mathbf{Sh}_{#1}(#2)}}
+\newcommand{\presheaf}[1]{\ensuremath{\widehat{#1}}}
+\newcommand{\Bcat}{\ensuremath{\mathbb{B}}}
+\newcommand{\Ccat}{\ensuremath{\mathbb{C}}}
+\newcommand{\Dcat}{\ensuremath{\mathbb{D}}}
+\newcommand{\Ecat}{\ensuremath{\mathbb{E}}}
+\newcommand{\Etop}{\ensuremath{\mathcal{E}}}
+\newcommand{\Ftop}{\ensuremath{\mathcal{F}}}
+\newcommand{\sheafify}{\ensuremath{\mathbf{a}}}
+\newcommand{\yoneda}{\ensuremath{\mathbf{y}}}
+\newcommand{\pow}[1]{\ensuremath{\mathcal{P}\left(#1\right)}}
+\newcommand{\powfin}[1]{\ensuremath{\mathcal{P}_{fin}\left(#1\right)}}
+\newcommand{\denote}[1]{\ensuremath{\llbracket #1 \rrbracket}}
+
+\newcommand{\epi}{\ensuremath{\twoheadrightarrow}}
+\newcommand{\mono}{\ensuremath{\rightarrowtail}}
+
+\newcommand{\ctxJ}[1]{\ensuremath{\vdash #1\,\mathrm{ctx}}}
+\newcommand{\typeJ}[2]{\ensuremath{#1 \vdash #2\,\mathrm{type}}}
+\newcommand{\hastypeJ}[3]{\ensuremath{#1 \vdash #2 \colon #3}}
+
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\charmap}{char}
+\DeclareMathOperator{\true}{true}
+\DeclareMathOperator{\sub}{Sub}
+\DeclareMathOperator{\dom}{Dom}
+\DeclareMathOperator{\cod}{Cod}
+\DeclareMathOperator{\epis}{Epi}
+\DeclareMathOperator{\into}{in}
+\DeclareMathOperator{\inl}{inl}
+\DeclareMathOperator{\inr}{inr}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{remark}[thm]{Remark}
+\newtheorem{example}[thm]{Example}
+\newtheorem{defn}[thm]{Definition}
+
+\title{Notes on Fibrational Semantics}
+\author{Daniel Gratzer}
+\date{\today}
+\begin{document}
+\begin{abstract}
+  I have lately found myself reading a large number of papers which
+  deal in some way with fibrations in category theory. Particularly to
+  give semantics to a logic or type theory. In order to be sure that
+  I've internalized these concepts in some small way I have written up
+  some notes introducing fibrations.
+
+  It would be far too ambitious to claim the completeness of these
+  notes (this would be closer to a dissertation \cite{Jacobs:91}
+  rather than a note). Rather, I shall aim for a level of completeness
+  that let's me state and prove semantics for an interesting type
+  theory. After that, I will gesture towards how the semantics might
+  be extended for more featureful logics or type theories but avoid
+  the same level of proof.
+\end{abstract}
+\maketitle
+
+\input{introduction}
+\input{fibrations}
+
+\bibliographystyle{plainnat}
+\bibliography{fibrations}{}
+\end{document}

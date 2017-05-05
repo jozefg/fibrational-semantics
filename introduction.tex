@@ -1,0 +1,54 @@
+\section{Introduction}
+
+Let us first start with a brief discussion motivating categorical
+semantics in general and fibrations in particular. Denotational
+semantics is a rich and well studied area of type theory dating back
+to work by Scott and Strachey. The core idea is to reduce the studying
+of programs to the study of better understood mathematical
+objects. Originally these tended to be things like \emph{sets} or
+\emph{continuous lattices}. As time has evolved though we have shifted
+to objects such as \emph{games} or other exotic objects. Lately
+however the field of categorical semantics has exploded. Categorical
+semantics in some sense acts as glue between syntax and traditional
+denotational semantics.
+
+With categorical semantics one doesn't use concrete. Instead,
+categorical semantics aim to axiomatize the structure necessary for
+any concrete model to be to possess. The classic example is that of a
+cartesian closed category (CCC). This possesses enough structure to model
+precisely the simply typed lambda calculus. Now the power of
+categorical semantics becomes apparent, by proving that we can model
+the simply typed lambda calculus in any CCC, we have suddenly reduced
+the problem of finding models to the problem of finding CCCs. This is
+a comparatively easy and well-studied problem. In fact, this
+immediately gives us dozens of models of the simply typed lambda
+calculus for free
+\begin{enumerate}
+\item $\cat{Set}$
+\item $\cat{Dom}$
+\item $\cat{Eq}$
+\item $\cat{PEq}$
+\item ...
+\end{enumerate}
+This illustrates the role of categorical semantics. They mediate
+between the purely syntactic demands of a type theory and the
+mathematically natural constraints that we need to impose on a
+category to obtain a model. By finding a convenient set of constraints
+for a model, models become cheap and easy to find.
+
+This is the role of categorical semantics but what about fibrational
+semantics? Fibrations are the categorical version of
+indexing. Indexing is a prevalent phenomenon in type theory; terms
+depend on types, types may depend on other types, types may even
+depend on terms! It turns out that be starting with a notion of
+indexing and imposing constraints on the indexed and the indexing
+categories we can quickly and flexibly model type theory. Again we
+encounter the advantages of generality become apparent when working
+with fibrational models. By specifying the properties we require of a
+fibration to provide in order to support a model of a type theory, we
+generalize over even the variety of fibrations that support this. For
+instance, if a split fibration yields a model of predicate logic then
+we are not merely limited to one source of fibrations. Throughout
+these notes the generality that this provides will make it apparent
+how fibrational semantics generalize the ideas of models into locally
+cartesian closed categories, toposes, and regular categories.

@@ -1,0 +1,193 @@
+
+\section{An Introduction to Fibrations}
+
+Before diving immediately into the categorical formulation of
+fibrations I would like to start with the set-theoretic intuition. In
+set theory, families of sets are a common occurrence. They are usually
+denoted $(X_i)_{i \in I}$ so that for any element $i \in I$ we have a
+designated set $X_i$. This presentation is what we shall refer to as
+the \emph{index-based} presentation of families of sets. An equivalent
+and useful way to view this family is as a function
+\[
+  \iota : X = \bigcup_{i \in I} X_i \to I
+\]
+we will refer to $X$ as the \emph{total} set and $I$ as the
+\emph{index} set. The idea is that every element $x \in X_i$ instead
+becomes $(i, x) \in X$, a pair of the index at which it lives and the
+actual element. The map $\iota$, the so called \emph{presentation}
+map, will then send $(i, x) \mapsto i$. We can then easily recover our
+original $X_i$s from $\iota$.
+\[
+  X_i = \iota^{-1}(i)
+\]
+For a user of set theory this presentation may seem slightly stilted
+but it does have the major advantage that it's purely based on maps
+between sets. This is something we can conceivably generalize to
+categories since categories possess this structure. The next question
+what properties of presentation maps to we wish to preserve when we
+categorify it.
+
+One feature that will turn out to be of great importance is the
+\emph{reindexing} of families of sets. For sets, if we have a map
+$f : I \to J$ and $(X_i)_{i \in I}$ we can conceivably form a
+family of sets which is indexed by $J$, $(Y_j)_{j \in J}$, where $Y_j$
+is defined as
+\[
+  Y_i = X_{f(i)}
+\]
+This reindexing again only depends on maps between sets so it is quite
+natural to categorify. The first way to categorify this is to maps
+sets to objects and functions as morphisms. We then define a family as
+a morphism $f : B \to A$. We generally will write this as \emph{$B$
+  over $A$} or pictorially
+\[
+  \begin{tikzcd}
+    B \ar[d, "f"] \\
+    A
+  \end{tikzcd}
+\]
+We cannot naturally recover what $B_a$ might mean yet because we do
+not have the same notion of elements that we do in set
+theory. Instead, we will see later that this is a general result of
+reindexing.
+
+Reindexing reappears here quite naturally in finite limit categories
+in the form of pullbacks. Specifically, if we cast a set theoretic
+function $f : X \to Y$ as a morphism $f : I \to J$, given a family
+$b : A \to I$ we can define the reindexing $f^*(b)$ as the pullback
+\[
+  \begin{tikzcd}
+    f^*(A) \ar[d, swap, "f^*(b)"] \ar[r] & A \ar[d, "b"]\\
+    I \ar[r, "f", swap] & J
+  \end{tikzcd}
+\]
+
+Now that we have generalized the notion of indexing from sets, we can
+start to observe some of the categorical structures which arise from
+this \emph{indexing-as-presentations} approach. First, families over
+$A$ for some given $A$ quite naturally form a category: $\Ccat/A$.
+\begin{defn}\label{defn:fibrations:slicecat}
+  The \emph{slice category} over $A$, written $\Ccat/A$ is defined as
+  the category with
+  \begin{description}
+  \item[Objects] Objects are families $f : B \to A$
+  \item[Morphisms] A morphism between $f : B \to A$ and $g : C \to A$ is
+    a morphism of $h \in \hom_{\Ccat}(B, C)$ so that $f = g \circ h$.
+    \[
+      \begin{tikzcd}
+        B \ar[rr, "h"] \ar[dr, swap, "f"] & & B \ar[dl, "g"]\\
+        & A &
+      \end{tikzcd}
+    \]
+  \end{description}
+\end{defn}
+Now that we have categories for families over $A$, it is natural to
+ask how the reindexing maps $f^*$ act on these categories. In
+particular, do these respect the structure of slice categories and
+thus form a functor. As it turns out, this is the case.
+\begin{thm}\label{thm:fibrations:pullbackfunctor}
+  For any $f : A \to B$ in a finite limit category, reindexing along
+  $f$ gives a functor $f^* : \Ccat/B \to \Ccat/A$.
+\end{thm}
+\begin{proof}
+  TODO
+\end{proof}
+
+This sort of structure, categories of indexed families with reindexing
+functors between them will turn out to be a natural setting for models
+of type theory. To give a flavoring for why this is interesting, we
+will model each $\ctxJ{\Gamma}$ as an object our category, each
+$\typeJ{\Gamma}{A}$ as a family over $\denote{\ctxJ{\Gamma}}$ and
+terms as morphisms between these families. The reindexing functor
+correspond naturally to substitution. With this we reduce the problem
+of axiomatizing our semantics to merely demanding the existence of
+certain categorical constructs in each slice category. In other words,
+we will use the categorified indexing to represent how types and terms
+depend on contexts. By abstracting away this structure now then, we
+can easily wipe away half the work of defining categorical semantics.
+
+In order to generalize away from one particular form on indexing, we
+isolate the idea of having a having a family of categories varying
+over a base or index category. This is a fibration. I will start by
+giving the formal definition of a fibration which makes references to
+some as of yet undefined concepts. I will then progressively attempt
+to fill it in so that the original, formal, definition becomes more
+intuitive.
+\begin{defn}\label{defn:fibration:fibration}
+  A fibration, $p : \Ecat \to \Bcat$, so that for every morphism
+  $u \in \hom_{\Bcat}(I, p(Y))$ there is a cartesian lifting
+  $\bar{u} : u^*(Y) \to Y$.
+\end{defn}
+Intuitively a fibration is a way of gluing a collection of categories
+indexed by another category so we start with a \emph{display functor}
+$p : \Ecat \to \Bcat$. We will think of $\Ecat$ as the collection of
+all the objects and morphisms of our indexed categories clumped
+together and $p$ tells us the index of some particular
+object. Accordingly, we can then say that a morphism,
+$f \in \hom_{\Ecat}(A, B)$ is vertical if $p(f) = 1$. It is obvious
+that $\Ecat_I$ comprised of objects $X$ so that $p(X) = I$ and
+morphisms vertical over $I$ forms a category. It is important that
+$\Ecat$ is not necessarily just $\amalg_I \Ecat_I$, the morphisms that
+are not vertical will important for relating the structure $\Bcat$ to
+$\Ecat_I$.
+
+What we would like next is a way from moving between $\Ecat_I$ and
+$\Ecat_J$ using the information we have from $\hom_\Bcat(J, I)$. This
+is just a generalization of what we did with slice categories to
+fibrations. In order to do this, given a map $f : J \to I$ we wish to
+find a way to transport from $\Ecat_I$ to $\Ecat_J$. In order to do
+this, we wish to lift the morphism in some way so that given $X$ so
+that $p(X) = I$ we have a map $X \to Y$ for some $Y$ so that
+$p(Y) = J$ that projects down onto $f$. If we think of this as
+substitution over contexts (like our above example) this roughly
+corresponds to saying that if we have a way to chance our context to a
+different context, we can change types in the first context to types
+in the second. Something that seems quite plausible, it ought to be
+just substitution on types.
+
+It would be ideal if this morphism was canonical in some sense. It's
+quite easy to imagine a scenario where there are infinitely many
+different morphisms that we could lift to. If we think of this
+operation as corresponding to substitution, then there must be a
+canonical choice for us to pick. Now for some notation, we write this
+hypothetical \emph{best substitution} as a morphism in $\Ecat$,
+$\bar{f} : f^*(X) \to X$ in order to evoke the similarity to the
+pullback case we started with. As is usual in category theory, we will
+characterize this lifting using a universal property. Namely, we want
+this morphism to be terminal. This means that given
+\[
+  \begin{tikzcd}
+    J \ar[r, "f"] \ar[d, "h"] & p(X)\\
+    p(Y') \ar[ru, "p(g)", swap]
+  \end{tikzcd}
+\]
+we want a canonical map
+\[
+  \begin{tikzcd}
+    f^*(X) \ar[r, "\bar{f}"] & p(X)\\
+    Y' \ar[u, dashed] \ar[ru, "g", swap]
+  \end{tikzcd}
+\]
+in this case, our lifting $\bar{u}$ is said to be \emph{cartesian}.
+\begin{defn}\label{defn:fibration:cartesian}
+  A map $f : X \to Y$ is said to be cartesian over $u : f(Y) \to f(X)$
+  if $p(f) = u$ and if for any map $g : Y' \to X$ so that
+  $u \circ v = p(g)$, there is a unique $h : Y' \to Y$ so that
+  $p(h) = v$ and $f \circ h = g$.
+\end{defn}
+
+With this we have at least acquired the necessary technical
+information to understand what a fibration is, however we're still
+lacking in some intuition. In particular, the connection between
+cartesian maps and reindexing functors remains unclear. What we really
+wanted was a family of functors $u^*$ for each $u : J \to I$ mapping
+$\Ecat_I$ to $\Ecat_J$. Well as it happens, this functor is definable
+using cartesian maps.
+
+\begin{thm}\label{thm:fibrations:reindexing}
+  For a fibration $p : \Ecat \to \Bcat$, any map $u : J \to I$ in
+  $\Bcat$ induces a functor $u^* : \Ecat_I \to \Ecat_J$.
+\end{thm}
+\begin{proof}
+  todo
+\end{proof}

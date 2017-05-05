@@ -303,3 +303,23 @@ straightforward to add these to our model.
   reindexing. We will say that this structure is \emph{split} if it is
   preserved on the nose by reindexing.
 \end{defn}
+
+The final piece of structure that we shall need for our model is
+something to handle the impredicative polymorphism of System F. For
+this, we need an object in our index category which classifies types
+in the total category. This is called a \emph{generic object}.
+
+\begin{defn}\label{defn:fibrations:genericobject}
+  A generic object in a fibration $p : \Ecat \to \Bcat$ if an object
+  $T \in \Ecat$ so that for any $X \in \Ecat$, there is a unique map
+  $u : p(X) \to p(T)$ so that there exists an $f : X \to T$ so that
+  $f$ is cartesian~\ref{defn:fibrations:cartesian} over $u$.
+\end{defn}
+
+The intuition here is that given any type, represented as an object in
+the category $\Ecat$, we can find a unique element $p(X) \to p(T)$ so
+that applying this substitution to $T$ gives us back the original type
+we started with. This tells us that cartesian liftings of
+$\hom(p(X), p(T))$ are in bijection with the objects of
+$\Ecat_X$. This will be used to model a ``type of small types'' for
+impredicative polymorphism.

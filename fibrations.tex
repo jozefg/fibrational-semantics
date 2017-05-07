@@ -296,13 +296,71 @@ The next area to explore is the structure that may be found in each
 fiber. In particular, we might want to demand the usual categorical
 constructs: limits, colimits, exponentials, etc. It turns out to be
 straightforward to add these to our model.
-
 \begin{defn}\label{defn:fibrations:fiberwiseX}
   A fibration $p : \Ecat \to \Bcat$ is said to posses \emph{fiberwise
     X} if each fiber $\Ecat_I$ possesses Xs and Xs are preserved by
   reindexing. We will say that this structure is \emph{split} if it is
   preserved on the nose by reindexing.
 \end{defn}
+Fiberwise structure, reverting to our intuition that fibrations are
+indexed categories, is just the assertion that each $\Ccat_i$ possess
+exponentials, products, or some other structure. It's not hard to see
+that the examples we've considred thus far has some examples.
+\begin{example}\label{defn:fibrations:codfiberwiseproducts}
+  The $\cod : \Ccat^{\to} \to \Ccat$ fibration has all finite limits
+  if $\Ccat$ is a finite limit category.
+\end{example}
+\begin{proof}
+  todo
+\end{proof}
+
+Another important piece of categorical logic that we shall need for
+fibrations is that of quantifiers as adjoints. This is explained
+in~\citet{Awodey:06} and originated with~\citet{Lawvere:69}. Here we
+shall give a brief summary for how the relate to fibrations. Recall
+that we like to intuitively view $\Ecat_I$ as the category of formulas
+in context $I$, that is if $A \in \Ecat_I$, we'd like to imagine it as
+the denotation $I \vdash A$. First, let us note that there seems to be
+a bijection between proofs
+\[
+  \Gamma \vdash \forall A.\ B \iff \Gamma, A \vdash B
+\]
+The direction from right to left is simply the introduction
+introduction rule
+\[
+  \inferrule{
+    \Gamma, x : A \vdash B
+  }{\Gamma \vdash \forall x : A.\ B(x)}
+\]
+Going from left to right on the other hand is a slightly contorted
+usage of the elimination rule (factoring out an application of
+cut). This is interesting because it's not at all obvious how to
+define a quantifier categorically: the heavy reliance on
+points/variables presents a problem. It's quite clear, however, how to
+formalize an adjoint. Running with this intuition, we claim
+\[
+  \pi_1^* \dashv \forall^*
+\]
+This is because weakening is precisely given by reindexing along
+$\pi_1$ in a fibration. Similarly, existential quantification forms a
+left adjoint by duality
+\[
+   \forall^* \dashv \pi_1^*
+\]
+This is similar to how, for locally cartesian closed categories we
+have $\Sigma_f \dashv f^* \dashv \Pi_f$ and just like in that
+situation, these adjoints are crucial for modeling quantifiers in
+type theory. Confusingly, these adjoints are called (co)products. They
+should not be confused with \emph{fiberwise} (co)products!
+\begin{defn}\label{defn:fibrations:products}
+  A fibration $p : \Ecat \to \Bcat$ is said to have (co)products when
+  the reindexing of projection functions
+  $\pi^* : \Ecat_I \to \Ecat_{I \times J}$ has a right (respectively
+  left) adjoint.
+\end{defn}
+We shall usually notate this adjoints as
+$\amalg_f \dashv f^* \dashv \Pi_f$ rather than $\exists$ and $\forall$
+to avoid stick to the notation used in literature.
 
 The final piece of structure that we shall need for our model is
 something to handle the impredicative polymorphism of System F. For
@@ -323,5 +381,3 @@ we started with. This tells us that cartesian liftings of
 $\hom(p(X), p(T))$ are in bijection with the objects of
 $\Ecat_X$. This will be used to model a ``type of small types'' for
 impredicative polymorphism.
-
-TODO: we also need quantifiers. Duh. Mention Lawvere and adjoints and stuffs

@@ -6,6 +6,7 @@
 \usepackage[hyperfootnotes=false]{hyperref}
 \usepackage{parskip}
 \usepackage{mathpartir}
+\usepackage{tabulary}
 
 \newcommand{\pto}[1]{\rightharpoonup}
 \newcommand{\den}[1]{\llbracket #1 \rrbracket}
@@ -29,7 +30,7 @@
 
 \newcommand{\ctxJ}[1]{\ensuremath{\vdash #1\,\mathrm{ctx}}}
 \newcommand{\typeJ}[2]{\ensuremath{#1 \vdash #2\,\mathrm{type}}}
-\newcommand{\hastypeJ}[3]{\ensuremath{#1 \vdash #2 \colon #3}}
+\newcommand{\hastypeJ}[4]{\ensuremath{#1; #2 \vdash #3 \colon #4}}
 
 \newcommand{\all}[2]{\ensuremath{\forall #1.\ #2}}
 \newcommand{\lam}[3]{\ensuremath{\lambda #1 \mathord{:} #2.\ #3}}

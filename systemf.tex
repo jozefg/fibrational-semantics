@@ -10,50 +10,72 @@ The first two judgments are defined by mutual induction
 \begin{mathpar}
   \inferrule{ }{\ctxJ{\cdot}} \and
   \inferrule{
-    \ctxJ{\Gamma}\\
-    \typeJ{\Gamma}{\tau}
-  }{\ctxJ{\Gamma, x : \tau}}\and
+    \ctxJ{\Delta}\\
+    \typeJ{\Delta}{\tau}
+  }{\ctxJ{\Delta, x : \tau}}\and
   \inferrule{
-    \typeJ{\Gamma, \alpha}{\tau}
-  }{\typeJ{\Gamma}{\all{\alpha}{\tau}}}\and
+    \typeJ{\Delta, \alpha}{\tau}
+  }{\typeJ{\Delta}{\all{\alpha}{\tau}}}\and
   \inferrule{
-    \typeJ{\Gamma}{\tau_1}\\
-    \typeJ{\Gamma}{\tau_2}
-  }{\typeJ{\Gamma}{\tau_1 \to \tau_2}}\and
+    \typeJ{\Delta}{\tau_1}\\
+    \typeJ{\Delta}{\tau_2}
+  }{\typeJ{\Delta}{\tau_1 \to \tau_2}}\and
   \inferrule{
-    \alpha \in \Gamma
-  }{\typeJ{\Gamma}{\alpha}}\and
+    \alpha \in \Delta
+  }{\typeJ{\Delta}{\alpha}}\and
 \end{mathpar}
 
 Next we have the usual typing rules for terms. One will observe that I
-deviate from some presentations of System F by using only one context
-to represent types \emph{and} terms rather than two distinct
-contexts. This is a nod towards the semantics where such things will
-be fundamentally mixed together anyways.
+deviate from some presentations of System F by using two contexts to
+represent types \emph{and} terms rather than blending them into one
+context. This is a nod towards the semantics where such things will be
+fundamentally separated anyways, with one living in the base category
+and one living in the fibers above it.
 
 \begin{mathpar}
   \inferrule{
     x : \tau \in \Gamma
-  }{\hastypeJ{\Gamma}{x}{\tau}}\and
+  }{\hastypeJ{\Delta}{\Gamma}{x}{\tau}}\and
   \inferrule{
-    \hastypeJ{\Gamma, x : \tau_1}{e}{\tau_2}
-  }{\hastypeJ{\Gamma}{\lam{x}{\tau}{e}}{\tau_1 \to \tau_2}}\and
+    \hastypeJ{\Delta}{\Gamma, x : \tau_1}{e}{\tau_2}
+  }{\hastypeJ{\Delta}{\Gamma}{\lam{x}{\tau}{e}}{\tau_1 \to \tau_2}}\and
   \inferrule{
-    \hastypeJ{\Gamma}{e_1}{\tau_1 \to \tau_2}\\
-    \hastypeJ{\Gamma}{e_2}{\tau_1}
-  }{\hastypeJ{\Gamma}{\ap{e_1}{e_2}}{\tau_2}}\and
+    \hastypeJ{\Delta}{\Gamma}{e_1}{\tau_1 \to \tau_2}\\
+    \hastypeJ{\Delta}{\Gamma}{e_2}{\tau_1}
+  }{\hastypeJ{\Delta}{\Gamma}{\ap{e_1}{e_2}}{\tau_2}}\and
   \inferrule{
-    \hastypeJ{\Gamma, \alpha}{e}{\tau}
-  }{\hastypeJ{\Gamma}{\Lam{x}{e}}{\all{\alpha}{\tau}}}\and
+    \hastypeJ{\Delta, \alpha}{\Gamma}{e}{\tau}
+  }{\hastypeJ{\Delta}{\Gamma}{\Lam{x}{e}}{\all{\alpha}{\tau}}}\and
   \inferrule{
-    \hastypeJ{\Gamma}{e}{\all{\alpha}{\tau_1}}\\
-    \typeJ{\Gamma}{\tau_2}
-  }{\hastypeJ{\Gamma}{\Ap{e}{\tau_2}}{[\tau_2/\alpha]\tau_1}}\and
+    \hastypeJ{\Delta}{\Gamma}{e}{\all{\alpha}{\tau_1}}\\
+    \typeJ{\Delta}{\tau_2}
+  }{\hastypeJ{\Delta}{\Gamma}{\Ap{e}{\tau_2}}{[\tau_2/\alpha]\tau_1}}\and
 \end{mathpar}
 
 Having fleshed out the objects of our language we now turn to the
 semantics of our language. They will proceed in three parts. First we
 isolate the specific variety of fibration that we will be
 studying. Second we will denote the terms and contexts into objects in
-base category. Finally, we will denote terms into the fibers above
-contexts.
+base category. Finally, we will denote terms into morphisms in the
+fibers above contexts. Put briefly
+\begin{description}
+\item[Type contexts] objects in the base category.
+\item[Types] morphisms in the base category into the generic object
+  from the type context. Equivalently, objects in the fiber above the
+  type context.
+\item[Term Contexts] objects in the fiber above a type context.
+\item[Terms] morphisms between term contexts. Equivalently, vertical
+  morphisms in the fiber above the type context.
+\end{description}
+
+With this plan in mind, we are in a position to define what structure
+we will need for our fibration.
+\begin{defn}\label{defn:systemf:polymorphicfibration}
+  A polymorphic fibration, $p : \Ecat \to \Bcat$ is a fibration with
+  \begin{enumerate}
+  \item Fiberwise finite products and exponentials.
+  \item Finite products in the base category.
+  \item A generic object $T$.
+  \item Right adjoints to the reindexing functors for projections.
+  \end{enumerate}
+\end{defn}

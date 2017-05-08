@@ -1,1 +1,46 @@
 \section{Fibrational Semantics Compared to Other Approaches}
+
+In the wide world of categorical semantics its worthwhile to pause and
+ask what distinguishes fibrational semantics as a useful tool.
+This section examines a few other common category theoretic tools used
+modeling type theories and discusses their relationship to fibrations.
+
+Perhaps the mostly widely used structure for modeling simple type
+theories is a closed cartesian category. In fact in this scenario I
+would expect fibrations to be a limited utility. There is not a
+complicated indexing or dependency structure in this logic. Therefore,
+having high powered machinery for handling indexing is simply a
+waste. In fact, for any propositional logic or type theory without
+type dependency of some sort fibrations are not nearly as useful. In
+this sense, fibrations are incomparable to CCCs and similar tools.
+
+A more interesting example is that of locally cartesian closed
+categories. These categories provide models of Martin-L\"of Type
+Theory~\cite{MartinLof:84}.
+\begin{defn}\label{defn:othersemantics:lccc}
+  A locally cartesian category $\mathcal{E}$ is a category where each
+  slice category is cartesian closed. Equivalently, the reindexing
+  functor $f^*$ has both a left and right adjoint.
+\end{defn}
+Under the LCCC methodology, contexts are interpreted as objects in the
+category and types are interpreted as slices over their contexts.
+\[
+  \begin{tikzcd}
+    \denote{\Gamma, A} \ar[d, "\denote{A}"]\\
+    \denote{\Gamma}
+  \end{tikzcd}
+\]
+The cartesian closer of the slice categories means that we can form
+function types using exponentials and quantification is interpreted by
+the various adjoints to $f^*$ under the quantifiers are adjoints
+slogan. However, LCCCs are a strict special case of fibrations. They
+are simply categories for which the $\cod$ fibration is a fiberwise
+CCC~\ref{defn:fibrations:fiberwiseX} or equivalently that it has
+products and coproducts~\ref{defn:fibrations:products}. By relaxing
+the particular fibration we require this definition generalizes
+LCCCs. A direct fibrational generalization of LCCCs to capture models
+of Martin-L\"of type theory are comprehension
+categories~\cite{Jacobs:93}. These are functors $P : \Ecat \to
+\Bcat^{\to}$ so that $\cod \circ P$ forms a fibration. By postulating
+various simple properties about this fibration this forms a model of
+type theory.

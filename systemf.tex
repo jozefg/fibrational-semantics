@@ -203,4 +203,59 @@ the other four rules are the interesting ones to prove.
 Now that we know that these fibrations will give us a sound model of
 System F, we turn to the question of what examples exist in the
 wild. For the sake of concision, I will only present one example in
-depth. That the fibration of families of PERs gives a model.
+depth. That the fibration of families of PERs gives a model. Firstly,
+we start by defining the relevant constructions.
+\begin{defn}\label{defn:systemf:assembly}
+  An assembly, $X$, \footnote{We will specialize this definition to
+    $\mathcal{K}_1$ for simplicity but an arbitrary PCA suffices} is a
+  pair of a set $\card{X}$, and a map $E : X \to \pow{\mathbb{N}}$ so
+  that for every $x \in X$, $E(x) \neq \emptyset$.
+\end{defn}
+
+We shall say that $n \in E(x)$ \emph{realizes} $x$ and write this more
+succinctly as $n \Vdash_X e$. It will be helpful to remember that we
+can encode Turing Machines\footnote{Or lambda terms if one wishes to
+  be a bit more civilized.} as natural numbers. This surjective
+encoding gives rise to a partial application operation, $\cdot$ where
+$n \cdot m = k$ if and only if the $n$th Turing machine when fed the
+input $m$ returns $k$. We can say that a realizer \emph{tracks} a map
+$n \Vdash f$ if
+\[
+  m \Vdash x \implies n \cdot m \Vdash f(x)
+\]
+This definition lets us form a categorical structure from assemblies.
+\begin{defn}\label{defn:systemf:asm}
+  The category $\cat{Asm}$ has assemblies as objects and morphisms are
+  set theoretic maps that are tracked some realizer.
+\end{defn}
+\begin{thm}\label{thm:systemf:asmregular}
+  The $\cat{Asm}$ forms a regular category.
+\end{thm}
+\begin{proof}
+  For a full proof see~\citet{VanOosten:08}. I will present the case
+  for exponentials as it's a good illustration of the structure of
+  $\cat{Asm}$.
+\end{proof}
+Next we shall introduce a corresponding notion of \emph{families} for
+assemblies. Such a notion also is intended to capture the
+computability aspects present in assemblies making them
+\emph{uniform}. We shall specialize this to partial equivalence
+families, PERs, on natural numbers. It is not hard to show that these
+correspond to assemblies for which $x \Vdash a, b$ implies that $a =
+b$.
+\begin{defn}\label{defn:systemf:ufam}
+  A uniform family over an assembly, $A$, is an indexed family of
+  partial equivalence relations on $\mathbb{N}$ denoted
+  $(R_a)_{a \in A}$. A morphism from $(A, (R_a)_{a \in A})$ to
+  $(B, (S_b)_{b \in B})$ is a pair of morphisms $(u, f)$ so that
+  $u \in \hom_{\cat{Asm}}(A, B)$ and a morphism $f$ so
+  $f_a : R_a \to S_{f(a)}$. Moreover, $f$ must be uniformly
+  tracked. This means that there is an $e$ so that $n \Vdash a$
+  implies $e \cdot n \Vdash f_a$.
+\end{defn}
+\begin{thm}
+  $\pi_1 : \cat{UFam} \to \cat{Asm}$ is a polymorphic fibration.
+\end{thm}
+\begin{proof}
+  todo
+\end{proof}

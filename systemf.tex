@@ -145,7 +145,7 @@ natural bijection $\hom(\pi^*(A), B) \cong \hom(A, \Pi B)$
   \Lambda(\denote{\hastypeJ{\Delta}{\Gamma, x : \tau_1}{e}{\tau_2}})\\
   \denote{\hastypeJ{\Delta}{\Gamma}{\ap{e_1}{e_2}}{\tau_2}} &=
   \ev \circ
-  \langle \denote{\hastypeJ{\Delta}{\Gamma}{e_1}{\tau_1 \to \tau_2}}, \denote{\hastypeJ{\Delta}{\Gamma}{e_1}{\tau_1 \to \tau_2}} \rangle\\
+  \langle \denote{\hastypeJ{\Delta}{\Gamma}{e_1}{\tau_1 \to \tau_2}}, \denote{\hastypeJ{\Delta}{\Gamma}{e_2}{\tau_1}} \rangle\\
   \denote{\hastypeJ{\Delta}{\Gamma}{\Lam{\alpha}{e}}{\all{\alpha}{\tau}}} &=
   \psi(\denote{\hastypeJ{\Delta, \alpha}{\Gamma}{e}{\tau}})\\
   \denote{\hastypeJ{\Delta}{\Gamma}{\Ap{e}{\tau_1}}{[\tau_1/\alpha]\tau_2}} &=
@@ -155,4 +155,52 @@ Again we are using $\pi_x$ to refer to the projection removing
 $\denote{\typeJ{\Delta}{\tau}}$ from
 $\denote{\ctxJ{\Delta}{\Gamma}}$. Notice that we are making use of
 lemma~\ref{lem:systemf:weakening} in order to apply the transposition
-$\psi$ above.
+$\psi$ above. We now want to show soundness, that is, that
+$\denote{-}$ respects $\beta\eta$-equivalence. Let us first explicitly
+spell out the rules that we expect to hold.
+\begin{mathpar}
+  \inferrule{
+    \hastypeJ{\Delta}{\Gamma}{e}{\tau}
+  }{
+    \hastypeJ{\Delta}{\Gamma}{e \equiv e}{\tau}
+  }\and
+  \inferrule{
+    \hastypeJ{\Delta}{\Gamma}{e_1 \equiv e_2}{\tau}
+  }{
+    \hastypeJ{\Delta}{\Gamma}{e_2 \equiv e_1}{\tau}
+  }\and
+  \inferrule{
+    \hastypeJ{\Delta}{\Gamma}{e_1 \equiv e_2}{\tau}\\
+    \hastypeJ{\Delta}{\Gamma}{e_2 \equiv e_3}{\tau}
+  }{
+    \hastypeJ{\Delta}{\Gamma}{e_1 \equiv e_3}{\tau}
+  }\and
+  \inferrule{ }{
+    \hastypeJ{\Delta}{\Gamma}{\lam{x}{\tau_1}{\ap{e}{x}} \equiv e}{\tau_1 \to \tau_2}
+  }\and
+  \inferrule{ }{
+    \hastypeJ{\Delta}{\Gamma}{\ap{(\lam{x}{\tau_1}{e_1})}{e_2} \equiv [e_2/x]e_1}{\tau}
+  }\and
+  \inferrule{ }{
+    \hastypeJ{\Delta}{\Gamma}{\Lam{\alpha}{\Ap{e}{\alpha}} \equiv e}{\all{\alpha}{\tau}}
+  }\and
+  \inferrule{ }{
+    \hastypeJ{\Delta}{\Gamma}{\Ap{(\Lam{\alpha}{e})}{\tau} \equiv [\tau/\alpha]e}{\tau}
+  }
+\end{mathpar}
+Now the first three equivalences are trivial to validate because the
+ambient equality in a category is an equivalence relation. Therefore,
+the other four rules are the interesting ones to prove.
+\begin{thm}\label{thm:systemf:soundness}
+  If $\hastypeJ{\Delta}{\Gamma}{e_1 \equiv e_2}{\tau}$ then
+  $\denote{\hastypeJ{\Delta}{\Gamma}{e_1}{\tau}} = \denote{\hastypeJ{\Delta}{\Gamma}{e_2}{\tau}}$
+  as morphisms in the fiber above $\denote{\Delta}$.
+\end{thm}
+\begin{proof}
+  todo
+\end{proof}
+
+Now that we know that these fibrations will give us a sound model of
+System F, we turn to the question of what examples exist in the
+wild. For the sake of concision, I will only present one example in
+depth. That the fibration of families of PERs gives a model.

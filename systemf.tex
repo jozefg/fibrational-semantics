@@ -4,15 +4,16 @@ Let us start with a simple definition of System F. To be more explicit
 than usual, let us start by noting the three core judgments of the
 system.
 \[
-  \ctxJ{\Gamma} \qquad \typeJ{\Gamma}{\tau} \qquad \hastypeJ{\Gamma}{e}{\tau}
+  \ctxJ{\Delta}{\Gamma} \qquad \typeJ{\Delta}{\tau} \qquad \hastypeJ{\Delta}{\Gamma}{e}{\tau}
 \]
-The first two judgments are defined by mutual induction
+The judgment for $\ctxJ{\Delta}{\Gamma}$ is a simple extension of the
+typehood judgment.
 \begin{mathpar}
-  \inferrule{ }{\ctxJ{\cdot}} \and
+  \inferrule{ }{\ctxJ{\Delta}{\cdot}} \and
   \inferrule{
-    \ctxJ{\Delta}\\
+    \ctxJ{\Delta}{\Gamma}\\
     \typeJ{\Delta}{\tau}
-  }{\ctxJ{\Delta, x : \tau}}\and
+  }{\ctxJ{\Delta}{\Gamma, x : \tau}}\and
   \inferrule{
     \typeJ{\Delta, \alpha}{\tau}
   }{\typeJ{\Delta}{\all{\alpha}{\tau}}}\and
@@ -85,7 +86,7 @@ sufficient to model System F. First, we present the denotation of
 type context.
 \begin{align*}
   \denote{\cdot} &= 1\\
-  \denote{\Gamma, \alpha} &= \denote{\Gamma} \times p(T)
+  \denote{\Delta, \alpha} &= \denote{\Delta} \times p(T)
 \end{align*}
 This is just the straightforward mapping based on the insight that
 maps into $p(T)$ will classify types via transposition. That is, we
@@ -93,14 +94,37 @@ know that there is a bijection
 $\phi_I : \hom(I, p(T)) \cong \obj(\Ecat_I)$.  Next comes the denotation
 of types.
 \begin{align*}
-  \denote{\Gamma \vdash \alpha} &= \pi_{\alpha}\\
-  \denote{\Gamma \vdash \tau_1 \to \tau_2} &=
-  \phi^{-1}\left( \phi(\denote{\tau_2})^{\phi(\denote{\tau_1})}\right)\\
-  \denote{\Gamma \vdash \all{\alpha}{\tau}} &=
-  \phi^{-1}\left(\Pi_{\pi}\phi(\denote{\tau_1})\right)
+  \denote{\typeJ{\Delta}{\alpha}} &= \pi_{\alpha}\\
+  \denote{\typeJ{\Delta}{\tau_1 \to \tau_2}} &=
+  \phi^{-1}\left(\phi(\denote{\typeJ{\Delta}{\tau_2}})^{\phi(\denote{\typeJ{\Delta}{\tau_1}})}\right)\\
+  \denote{\typeJ{\Delta}{\all{\alpha}{\tau}}} &=
+  \phi^{-1}\left(\Pi_{\pi}\phi(\denote{\typeJ{\Delta, \alpha}{\tau_1}})\right)
 \end{align*}
-Here $\pi_{\alpha}$ is the projection extraction $\alpha \in \Gamma$
-from the product $\denote{\Gamma}$. Notice the use of $\phi$ to make
+Here $\pi_{\alpha}$ is the projection extraction $\alpha \in \Delta$
+from the product $\denote{\Delta}$. Notice the use of $\phi$ to make
 use of the structure that we have at the level of fibers in the base
 category. This ability to tie together the base and total category is
 a common usage of generic objects.
+
+Now under $\phi$, we know that the denotation
+$\denote{\typeJ{\Delta}{A}}$ corresponds to an object in the fiber
+above $\denote{\Delta}$. Using this, we shall denote terms
+$\hastypeJ{\Delta}{\Gamma}{e}{\tau}$ into morphisms in
+\[
+  \hom_{\Ecat_{\denote{\Delta}}}(\denote{\ctxJ{\Delta}{\Gamma}}, \phi(\denote{\typeJ{\Delta}{A}}))
+\]
+This is defined, as is standard, by induction on the typing
+derivation. In order to do this, let us shall write $\psi_A$ for the
+natural bijection $\hom(\pi^*(A), B) \cong \hom(A, \Pi B)$
+\begin{align*}
+  \denote{\hastypeJ{\Delta}{\Gamma}{x}{\tau}} &= \pi_x\\
+  \denote{\hastypeJ{\Delta}{\Gamma}{\lam{x}{\tau_1}{e}}{\tau_1 \to \tau_2}} &=
+  \Lambda(\denote{\hastypeJ{\Delta}{\Gamma, x : \tau_1}{e}{\tau_2}})\\
+  \denote{\hastypeJ{\Delta}{\Gamma}{\ap{e_1}{e_2}}{\tau_2}} &=
+  \ev \circ
+  \langle \denote{\hastypeJ{\Delta}{\Gamma}{e_1}{\tau_1 \to \tau_2}}, \denote{\hastypeJ{\Delta}{\Gamma}{e_1}{\tau_1 \to \tau_2}} \rangle\\
+  \denote{\hastypeJ{\Delta}{\Gamma}{\Lam{\alpha}{e}}{\all{\alpha}{\tau}}} &=
+  \psi(\denote{\hastypeJ{\Delta, \alpha}{\Gamma}{e}{\tau}})\\
+  \denote{\hastypeJ{\Delta}{\Gamma}{\Ap{e}{\tau_1}}{[\tau_1/\alpha]\tau_2}} &=
+  \langle 1, \denote{\typeJ{\Delta}{\tau_1}}\rangle^*(\denote{\hastypeJ{\Delta, \alpha}{\Gamma}{e}{\all{\alpha}{\tau_2}}})
+\end{align*}

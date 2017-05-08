@@ -28,7 +28,7 @@
 \newcommand{\epi}{\ensuremath{\twoheadrightarrow}}
 \newcommand{\mono}{\ensuremath{\rightarrowtail}}
 
-\newcommand{\ctxJ}[1]{\ensuremath{\vdash #1\,\mathrm{ctx}}}
+\newcommand{\ctxJ}[2]{\ensuremath{#1 \vdash #2\,\mathrm{ctx}}}
 \newcommand{\typeJ}[2]{\ensuremath{#1 \vdash #2\,\mathrm{type}}}
 \newcommand{\hastypeJ}[4]{\ensuremath{#1; #2 \vdash #3 \colon #4}}
 
@@ -44,6 +44,7 @@
 \DeclareMathOperator{\sub}{Sub}
 \DeclareMathOperator{\dom}{Dom}
 \DeclareMathOperator{\obj}{obj}
+\DeclareMathOperator{\ev}{ev}
 \DeclareMathOperator{\cod}{Cod}
 \DeclareMathOperator{\epis}{Epi}
 \DeclareMathOperator{\into}{in}
@@ -85,6 +86,7 @@
 \input{othersemantics}
 \input{conclusion}
 
+\nocite{*}
 \bibliographystyle{plainnat}
 \bibliography{fibrations}{}
 \end{document}

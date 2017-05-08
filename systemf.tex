@@ -104,7 +104,30 @@ Here $\pi_{\alpha}$ is the projection extraction $\alpha \in \Delta$
 from the product $\denote{\Delta}$. Notice the use of $\phi$ to make
 use of the structure that we have at the level of fibers in the base
 category. This ability to tie together the base and total category is
-a common usage of generic objects.
+a common usage of generic objects. An important lemma that we shall
+make use of is that implicit weakening of typing derivation
+corresponds to categorical weakening (reindexing by $\pi^*$).
+
+\begin{lem}\label{lem:systemf:weakening}
+  $\denote{\typeJ{\Delta, \alpha}{\tau}}$ factors through
+  $\denote{\typeJ{\Delta}{\tau}}$ by
+  $\pi_1 : \denote{\Delta} \times p(T) \to \denote{\Delta}$.
+\end{lem}
+\begin{proof}
+  todo
+\end{proof}
+
+Now by the definition~\ref{defn:fibrations:genericobject} we know that
+this means precisely that
+\[
+  \pi_1^*(\phi(\denote{\typeJ{\Delta}{\tau}})) = \phi(\denote{\typeJ{\Delta, \alpha}{\tau}})
+\]
+so weakening does precisely correspond to categorical weakening. This
+is important because we want to use the adjunction
+$\pi^* \dashv \Pi_\pi$. However, in order to do this we need a
+morphism with domain $\pi^*(A)$ for some $A$. The above lemma tells us
+that when it's $\phi(\denote{typeJ{\Delta, \alpha}{\tau}})$ where we
+happen to know that $\typeJ{\Delta}{\tau}$ holds then this is the case.
 
 Now under $\phi$, we know that the denotation
 $\denote{\typeJ{\Delta}{A}}$ corresponds to an object in the fiber
@@ -128,3 +151,8 @@ natural bijection $\hom(\pi^*(A), B) \cong \hom(A, \Pi B)$
   \denote{\hastypeJ{\Delta}{\Gamma}{\Ap{e}{\tau_1}}{[\tau_1/\alpha]\tau_2}} &=
   \langle 1, \denote{\typeJ{\Delta}{\tau_1}}\rangle^*(\denote{\hastypeJ{\Delta, \alpha}{\Gamma}{e}{\all{\alpha}{\tau_2}}})
 \end{align*}
+Again we are using $\pi_x$ to refer to the projection removing
+$\denote{\typeJ{\Delta}{\tau}}$ from
+$\denote{\ctxJ{\Delta}{\Gamma}}$. Notice that we are making use of
+lemma~\ref{lem:systemf:weakening} in order to apply the transposition
+$\psi$ above.

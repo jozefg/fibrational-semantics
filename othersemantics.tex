@@ -44,3 +44,44 @@ categories~\cite{Jacobs:93}. These are functors $P : \Ecat \to
 \Bcat^{\to}$ so that $\cod \circ P$ forms a fibration. By postulating
 various simple properties about this fibration this forms a model of
 type theory.
+
+Another common basis for categorical logic is topos theory.
+\begin{defn}\label{defn:othersemantics:topos}
+  An elementary topos $\Etop{}$ is a category that
+  \begin{itemize}
+  \item has all finite limits
+  \item is cartesian closed
+  \item has a subobject classifier, $\Omega$
+  \end{itemize}
+\end{defn}
+The study of elementary topoi is a rich subject. The reader is referred
+to~\citet{MacLane:94} or~\citet{Johnstone:14} for a more in depth
+account. The high level of idea of topos theoretic models, when not
+simply using them as more structured LCCCs, is to use the subobject
+classifier as an internal universe of sorts. $\Omega$ forms an
+internal Heyting algebra and thus a model of intuitionistic logic. It
+also comes equipped with quantifiers via adjoints (they are derivable)
+to pullback functors as with LCCCs. By interpreting predicates on an
+object as subobjects of it
+\[
+  \begin{tikzcd}
+    R \ar[d, rightarrowtail, "m"]\\
+    A \times A
+  \end{tikzcd}
+\]
+we can interpret many sorted higher order intuitionistic logic into a
+topos. The higher order aspect comes from exponentiation on
+$\Omega^A$, which is equivalent to predicates on $A$ since
+$\hom(A, \Omega) \cong \sub(A)$. Of particular interest are
+Grothendieck topoi. These are topoi formed as sheaves on a particular
+category equipped with a Grothendieck topology. These provide a
+categorical analog generalizing forcing for instance. However, topoi
+too may be classified by fibrations. An topos is elementary topos is
+simply a category whose subobject fibration $\sub$ has fibered
+products and exponentials as well as a generic object. This
+classification describes the topos theoretic approach to interpreting
+logic. It explains how predicates in context are understood as
+subobject and isolates $\Omega$ as the object level reflection of this
+interpretation. Again by generalizing this strategy of indexing we can
+find alternative models of higher order intuitionistic logic anywhere
+we are able to construct a higher order fibration.

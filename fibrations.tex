@@ -89,7 +89,35 @@ thus form a functor. As it turns out, this is the case.
   $f$ gives a functor $f^* : \Ccat/B \to \Ccat/A$.
 \end{thm}
 \begin{proof}
-  TODO
+  First, we wish to show that $f^*(1) = 1$. This amounts to showing
+  that in
+  \[
+    \begin{tikzcd}
+      f^*(C) \ar[r, dashed, "h"] \ar[dr, swap, "f^*(g)"] \ar[rrr, bend left]
+      & f^*(C) \ar[d, "f^*(g)"] \ar[r] &
+      C \ar[d, "g"] \ar[r, equal] & C \ar[dl, "g"]\\
+      & A \ar[r, "f", swap] & B &
+    \end{tikzcd}
+  \]
+  that $h = 1$. We know that $h$ is unique by the universal property
+  of pullbacks. Therefore, it suffices to show that
+  $g \circ g^*(f) = g \circ g^*(f)$ but this is obvious. The
+  computation that associativity is preserved is similar. It suffices
+  to show that $l = n \circ m$ in the following\footnote{Look, there
+    is no diagram with this many arrows that isn't terrible. I'm sorry.}.
+  \[
+    \begin{tikzcd}
+      f^*(C) \ar[dr, "f^*(g)", swap] \ar[rrrr, bend left]
+      \ar[rr, bend left, "l", swap, dashed] \ar[r, dashed, "m"]&
+      f^*(D) \ar[d, "f^*(h)"] \ar[rrrr, bend left] \ar[r, dashed, "n"]&
+      f^*(E) \ar[dl, "f^*(i)"] \ar[rrrr, bend left]
+      &&C \ar[dr, "g"]\ar[r, "j"] & D \ar[d, "h"] \ar[r, "k"] & E \ar[dl, "i"]\\
+      &A \ar[rrrr, "f", swap]& &&&B&
+    \end{tikzcd}
+  \]
+  However, since $l$ is unique in being the only such commuting arrow,
+  it must be that $m \circ n = l$ by the universal property of
+  pullbacks. This gives us that $f^*$ indeed determines a functor.
 \end{proof}
 
 This sort of structure, categories of indexed families with reindexing

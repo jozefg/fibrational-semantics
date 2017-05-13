@@ -216,7 +216,38 @@ using cartesian maps.
   $\Bcat$ induces a functor $u^* : \Ecat_I \to \Ecat_J$.
 \end{thm}
 \begin{proof}
-  todo
+  Suppose we have a morphism $u : J \to I$ we would like to define
+  such a functor. It will send an object $A \in \Ecat_I$ to
+  $u^*(A)$. That is,
+  \[
+    \begin{tikzcd}
+      u^*(A) \ar[r, dashed, "\bar{u}"] & A\\
+      J \ar[r, "u"] & I
+    \end{tikzcd}
+  \]
+  where $\bar{u}$ is the cartesian morphism over $u$ terminating in
+  $A$. Now suppose we have the following situation
+  \[
+    \begin{tikzcd}
+      u^*(A) \ar[r, dashed, "\bar{u}_A"] & A \ar[d, "f"]\\
+      u^*(B) \ar[r, dashed, "\bar{u}_B"] & B\\
+      J \ar[r, "u"] & I
+    \end{tikzcd}
+  \]
+  Now since $f$ is vertical, we know that $p(f) = 1$. Therefore,
+  $p(f \circ \bar{u}_A) = 1 \circ u \circ 1$. Then by the universal
+  property of a cartesian morphism we get
+  \[
+    \begin{tikzcd}
+      u^*(A) \ar[d, dashed] \ar[r, dashed, "\bar{u}_A"] & A \ar[d, "f"]\\
+      u^*(B) \ar[r, dashed, "\bar{u}_B"] & B\\
+      J \ar[r, "u"] & I
+    \end{tikzcd}
+  \]
+  providing the action of our functor on morphisms. The proof that
+  $u^*$ determines preserves identities and compositions is remarkably
+  similar to theorem~\ref{thm:fibrations:pullbackfunctor}. I will
+  therefore elide it here.
 \end{proof}
 
 In order to see that this characterization is even equivalent to this

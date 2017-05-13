@@ -378,5 +378,38 @@ the category $\Ecat$, we can find a unique element $p(X) \to p(T)$ so
 that applying this substitution to $T$ gives us back the original type
 we started with. This tells us that cartesian liftings of
 $\hom(p(X), p(T))$ are in bijection with the objects of
-$\Ecat_X$. This will be used to model a ``type of small types'' for
+$\Ecat_X$.
+\begin{lem}\label{lem:fibrations:genericobject}
+  If $p : \Ecat \to \Bcat$ is a split fibration with a generic object,
+  then $\hom(I, p(T)) \cong \obj(\Ecat_I)$. Moreover, this isomorphism
+  is natural in $I$.
+\end{lem}
+\begin{proof}
+  Suppose that we have a generic object $T$, we wish to construct the
+  desired isomorphism $\hom(I, p(T)) \cong \obj(\Ecat_I)$. First we
+  note that given $A \in \obj(\Ecat_I)$ we have a unique morphism
+  $u \in \hom(I, p(T))$ so that $u^*(T)$. For the reverse, given a
+  $u : I \to p(T)$ then $u^*(T) \in \obj(\Ecat_I)$ so $u$ must be the
+  unique such morphism by assumption. These two procedures are
+  obviously inverses. Therefore we have a bijection
+  $\hom(I, p(T)) \cong \obj(\Ecat_I)$.
+
+  Next, we will show that this is natural. Suppose we have
+  \[
+    \begin{tikzcd}
+      I \ar[r, "u"] & J \ar[r, "v"] & p(T)
+    \end{tikzcd}
+  \]
+  We wish to show that $u^*(v^*(p(T))) = (v \circ u)^*(T)$ but this is
+  precisely our assumption that $p$ is split.
+\end{proof}
+\begin{cor}\label{cor:fibrations:reindexingcommutes}
+  If $p : \Ecat \to \Bcat$ is a fibration with a generic object $T$
+  and an isomorphism $\theta : \hom(I, p(T)) \cong \obj(\Ecat_I)$,
+  then $\theta(u \circ v) = u^*(\theta(v))$
+\end{cor}
+\begin{proof}
+  This is precisely what \emph{natural in $I$} means for $\theta$.
+\end{proof}
+This will be used to model a ``type of small types'' for
 impredicative polymorphism.

@@ -216,9 +216,9 @@ using cartesian maps.
   $\Bcat$ induces a functor $u^* : \Ecat_I \to \Ecat_J$.
 \end{thm}
 \begin{proof}
-  Suppose we have a morphism $u : J \to I$ we would like to define
-  such a functor. It will send an object $A \in \Ecat_I$ to
-  $u^*(A)$. That is,
+  Suppose we have a morphism $u : J \to I$ we would like to define a
+  functor $u^* : \Ecat_I \to \Ecat_J$. It will send an object
+  $A \in \Ecat_I$ to $u^*(A)$. That is,
   \[
     \begin{tikzcd}
       u^*(A) \ar[r, dashed, "\bar{u}"] & A\\
@@ -303,7 +303,46 @@ fibration.
   The $\cod$ functor defines a fibration.
 \end{example}
 \begin{proof}
-  todo
+  Since $\cod$ obviously defines a functor where the action on
+  morphisms sends $(f, g) \mapsto g$ all that remains is to show the
+  existence of Cartesian liftings. Suppose we have a morphism $f : A
+  \to B$ and an object $g$ so that $\cod(g) = B$. Then we are in the
+  following situation
+  \[
+    \begin{tikzcd}
+      & C \ar[d, "g"]\\
+      A \ar[r, "f"] & B
+    \end{tikzcd}
+  \]
+  we construct our lifting using the fact that our category has
+  pullbacks.
+  \[
+    \begin{tikzcd}
+      f^*(C) \ar[d, "f^*(g)", swap] \ar[r, "\bar{f}"] & C \ar[d, "g"]\\
+      A \ar[r, "f", swap] & B
+    \end{tikzcd}
+  \]
+  this is clearly a morphism over $f$ in $\Ccat^{\to}$. All that
+  remains to show is that it is Cartesian. Suppose that we have
+  \[
+    \begin{tikzcd}
+      A \ar[r, "f"] & B\\
+      D \ar[u, "i"] \ar[ru, "\cod(h)", swap] &
+    \end{tikzcd}
+  \]
+  This means that we must have
+  \[
+    \begin{tikzcd}
+      D' \ar[rr, bend left] \ar[ddr, bend right] &
+      f^*(C) \ar[d, "f^*(g)", swap] \ar[r, swap, "\bar{f}"] & C \ar[d, "g"]\\
+      & A \ar[r, "f", swap] & B\\
+      & D \ar[u, "i"] \ar[ru, "\cod(h)", swap] &
+    \end{tikzcd}
+  \]
+  However by the universal property of our pullback we then have a
+  unique morphism $j : D' \to f^*(C)$ which must form a commutative
+  square over $i$. Therefore, this is a cartesian morphism over $f$ as
+  required.
 \end{proof}
 
 Now an important step of understanding a fibration
@@ -317,7 +356,17 @@ of the codomain fibration
   corresponds to the pullback functor of slice categories.
 \end{lem}
 \begin{proof}
-  todo
+  If a morphism $(f, g)$ from $j$ to $k$ is over $1$ then this must
+  mean that $g = 1$. Therefore, we must have the commutative diagram
+  \[
+    \begin{tikzcd}
+      A \ar[rr, "f"] \ar[dr, swap, "j"] && B \ar[dl, "k"]\\
+      & C &
+    \end{tikzcd}
+  \]
+  so vertical morphisms are precisely morphisms in the slice
+  category. This means that $\Ecat_A$, the category of objects over
+  $A$ is precisely $\Ccat/A$ as required.
 \end{proof}
 
 Have done this we have come full circle: our very abstract notion of

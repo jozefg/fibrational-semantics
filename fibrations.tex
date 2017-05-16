@@ -418,7 +418,30 @@ that the examples we've considred thus far has some examples.
   if $\Ccat$ is a finite limit category.
 \end{example}
 \begin{proof}
-  todo
+  By lemma~\ref{lem:fibrations:fibersareslices} it suffices to show
+  that the slice categories, $\Ccat/A$, have all finite limits and
+  that they are preserved under pullback. Firstly, all slices
+  categories possess products via pullbacks.
+  \[
+    \begin{tikzcd}
+      & A \times_C B \ar[dl, dashed] \ar[dr, dashed] &\\
+      A \ar[dr] && B \ar[dl] \\
+      & C &
+    \end{tikzcd}
+  \]
+  It is obvious that the universal property of this pullback precisely
+  coincides with the required universal property of products in a
+  slice category.
+  \[
+    \begin{tikzcd}
+      & D\ar[ddl, bend right] \ar[ddr, bend left] \ar[d, dashed]  &\\
+      & A \times_C B \ar[dl] \ar[dr] &\\
+      A \ar[dr] && B \ar[dl] \\
+      & C &
+    \end{tikzcd}
+  \]
+  Next, equalizers are just inherited from the underlying category. I
+  leave this as an exercise to the reader. TODO: I really shouldn't.
 \end{proof}
 
 Another important piece of categorical logic that we shall need for

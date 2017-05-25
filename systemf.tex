@@ -126,6 +126,41 @@ corresponds to categorical weakening (reindexing by $\pi^*$).
     $\alpha \not\in \Delta$. Next we note that
     $\denote{\typeJ{\Delta, \alpha}{\beta}} = \pi_\beta$. Now we know
     that $\pi_\beta = \pi_\beta \circ \pi$ so we're done.
+  \item
+    $\inferrule{
+      \typeJ{\Delta}{\tau_1}\\
+      \typeJ{\Delta}{\tau_2}
+    }{\typeJ{\Delta}{\tau_1 \to \tau_2}}$\\
+
+    First, let us abbreviate $\denote{\typeJ{\Delta}{\tau_i}}$ as
+    $f_i$. Then our IH tell us that
+    $\denote{\typeJ{\Delta, \alpha}{\tau_i}} = f_i \circ \pi_1$ for
+    $i \in \{1, 2\}$. Now we wish to show that there is some $g$ so
+    that
+    \[
+      \denote{\typeJ{\Delta, \alpha}{\tau_1 \to \tau_2}} =
+      \phi^{-1}\left(\phi(\denote{\typeJ{\Delta, \alpha}{\tau_2}})^{\phi(\denote{\typeJ{\Delta, \alpha}{\tau_1}})}\right) =
+      g \circ \pi_1
+    \]
+    Now we apply our IH to conclude that
+    \[
+      \denote{\typeJ{\Delta, \alpha}{\tau_1 \to \tau_2}} =
+      \phi^{-1}\left(\phi(f_2 \circ \pi_1)^{\phi(f_1 \circ \pi_1)}\right)
+    \]
+    Now by corollary~\ref{cor:fibrations:reindexingcommutes} we then
+    have that $\pi_1^*(\phi(f_2))^{\pi_1^*(\phi(f_1))}$. Even better,
+    since exponentials in each fiber are preserved by reindexing, we
+    always have that $f^*(B^A) = f^*(B)^{f^*(A)}$ so we can rewrite
+    the above to just
+    $\pi_1^*\left(\phi(f_2)^{\phi(f_1)}\right)$. Again using
+    corollary~\ref{cor:fibrations:reindexingcommutes} we have that
+    $\phi^{-1}(\pi_1^*(\phi(f_2)^{\phi(f_1)})) =
+    \phi(\phi(f_2)^{\phi(f_1)}) \circ \pi_1$ so we have that
+    \[
+      \denote{\typeJ{\Delta, \alpha}{\tau_1 \to \tau_2}} =
+      \denote{\typeJ{\Delta}{\tau_1 \to \tau_2}} \circ \pi_1
+    \]
+    as required.
   \end{itemize}
 \end{proof}
 

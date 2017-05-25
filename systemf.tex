@@ -161,6 +161,36 @@ corresponds to categorical weakening (reindexing by $\pi^*$).
       \denote{\typeJ{\Delta}{\tau_1 \to \tau_2}} \circ \pi_1
     \]
     as required.
+  \item
+    $\inferrule{
+      \typeJ{\Delta, \beta}{\tau_1}
+    }{\typeJ{\Delta}{\all{\beta}{\tau_1}}}$\\
+    Now our IH here tells us that
+    \[
+      \denote{\typeJ{\Delta, \beta, \alpha}{\tau_1}} =
+      \denote{\typeJ{\Delta, \beta}{\tau_1}} \circ \pi_1
+    \]
+    Now we need to show that this holds for
+    $\typeJ{\Delta}{\all{\beta}{\tau_1}}$. First, we note that
+    \[
+      \denote{\Delta, \alpha}{\all{\beta}{\tau_1}} =
+      \phi^{-1}\left(\Pi_{\pi} \phi(\denote{\Delta, \alpha, \beta}{\tau_1})\right)
+    \]
+    Now we can perform some simple rewrites
+    \begin{align*}
+      \phi^{-1}\left(\Pi_{\pi} \phi(\denote{\Delta, \alpha, \beta}{\tau_1})\right) &=
+      \phi^{-1}\left(\Pi_{\pi} \phi(\denote{\Delta, \beta}{\tau_1} \circ \pi_1)\right) \\&=
+      \phi^{-1}\left(\Pi_{\pi} \pi_1^*(\phi(\denote{\Delta, \beta}{\tau_1}))\right) \\&=
+      \phi^{-1}\left(\pi_1^*\left(\Pi_{\pi} \phi(\denote{\Delta, \beta}{\tau_1})\right)\right) \\&=
+      \phi^{-1}\left(\Pi_{\pi} \phi(\denote{\Delta, \beta}{\tau_1})\right) \circ \pi_1\\&=
+      \denote{\typeJ{\Delta}{\all{\beta}{\tau_1}}} \circ \pi_1
+    \end{align*}
+    Here the crucial step that
+    $\phi^{-1}\left(\Pi_{\pi} \pi_1^*(\phi(\denote{\Delta, \beta}{\tau_1}))\right) = \phi^{-1}\left(\pi_1^*\left(\Pi_{\pi} \phi(\denote{\Delta, \beta}{\tau_1})\right)\right)$
+    is a result of the fact that $\Pi_\pi$ is an application of
+    Beck-Chevalley, in fact the \emph{split} or \emph{strict} version
+    of it that we require for products. TODO: do I ever explain
+    Beck-Chevalley? Also, don't play so fast and loose with indexing.
   \end{itemize}
 \end{proof}
 

@@ -109,12 +109,24 @@ make use of is that implicit weakening of typing derivation
 corresponds to categorical weakening (reindexing by $\pi^*$).
 
 \begin{lem}\label{lem:systemf:weakening}
+  If $\typeJ{\Delta}{\tau}$ then
   $\denote{\typeJ{\Delta, \alpha}{\tau}}$ factors through
   $\denote{\typeJ{\Delta}{\tau}}$ by
   $\pi_1 : \denote{\Delta} \times p(T) \to \denote{\Delta}$.
 \end{lem}
 \begin{proof}
-  todo
+  We proceed by induction on $\typeJ{\Delta}{\tau}$
+  \begin{itemize}
+  \item
+    $\inferrule{
+      \beta \in \Delta
+    }{\typeJ{\Delta}{\beta}}$
+
+    In this case we know that $\beta \neq \alpha$ since
+    $\alpha \not\in \Delta$. Next we note that
+    $\denote{\typeJ{\Delta, \alpha}{\beta}} = \pi_\beta$. Now we know
+    that $\pi_\beta = \pi_\beta \circ \pi$ so we're done.
+  \end{itemize}
 \end{proof}
 
 Now by the definition~\ref{defn:fibrations:genericobject} we know that
@@ -174,6 +186,12 @@ spell out the rules that we expect to hold.
     \hastypeJ{\Delta}{\Gamma}{e_2 \equiv e_3}{\tau}
   }{
     \hastypeJ{\Delta}{\Gamma}{e_1 \equiv e_3}{\tau}
+  }\and
+  \inferrule{
+    \hastypeJ{\Delta}{\Gamma}{e_1 \equiv e_2}{\tau_1}
+    \hastypeJ{\Delta}{\Gamma, x : \tau_1}{C[x]}{\tau_2}
+  }{
+    \hastypeJ{\Delta}{\Gamma}{C[e_1] \equiv C[e_2]}{\tau_2}
   }\and
   \inferrule{ }{
     \hastypeJ{\Delta}{\Gamma}{\lam{x}{\tau_1}{\ap{e}{x}} \equiv e}{\tau_1 \to \tau_2}
